@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบคำนวณภาษีเงินได้บุคคลธรรมดา (ภ.ง.ด.91)</title>
+  
+  <!-- Stylesheets (Theme Variables & App Component Styles) -->
+  <link rel="stylesheet" href="./styles/theme.css" />
+  <link rel="stylesheet" href="./styles/app.css" />
+</head>
+<body>
+
+  <div id="wizard-container"></div>
+
+  <script type="module">
+    import { TaxWizard } from './src/form/wizard.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.taxWizard = new TaxWizard('#wizard-container');
+    });
+  </script>
+</body>
+</html>

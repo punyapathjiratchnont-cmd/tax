@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test test/tax.test.js"
+    "test": "node --test test/integration.test.js test/render.test.js test/wizard.test.js test/form.test.js test/calc.test.js test/tax.test.js test/advice.test.js test/management.test.js test/rules.test.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -25,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "jsdom": "^30.1.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

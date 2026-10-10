@@ -1,9 +1,25 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Prompt, Space_Mono, Mali } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const prompt = Prompt({
+  subsets: ['thai', 'latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-prompt-next',
+})
+
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-mono-next',
+})
+
+const mali = Mali({
+  subsets: ['thai', 'latin'],
+  weight: ['700'],
+  variable: '--font-title-next',
+})
 
 export const metadata: Metadata = {
   title: 'tax',
@@ -17,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th">
-      <body className={`${inter.className} bg-white text-black antialiased`}>
+      <body className={`${prompt.variable} ${spaceMono.variable} ${mali.variable} bg-[#060b07] text-white antialiased`}>
         {children}
         <Analytics />
       </body>

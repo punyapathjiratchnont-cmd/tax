@@ -118,7 +118,7 @@ test('6. กรณีระบุปีภาษีที่ไม่มีข�
       getTaxRules(2500);
     },
     (err) => {
-      return err.message.includes('ไม่พบข้อมูลกฎภาษีสำหรับปีภาษี 2500');
+      return err.message.includes('ไม่มีข้อมูลกฎภาษีของปี 2500');
     }
   );
 });

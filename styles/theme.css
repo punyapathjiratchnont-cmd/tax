@@ -1,0 +1,63 @@
+/**
+ * ============================================================================
+ * ธีมระบบคำนวณภาษีเงินได้บุคคลธรรมดา (ภ.ง.ด.91) - ขาวดำ (Monochrome)
+ * ============================================================================
+ * ไฟล์นี้เป็นจุดเก็บ CSS Variables ทั้งหมดเพียงจุดเดียว
+ * หากต้องการเปลี่ยนธีมภายหลัง (เช่น พาสเทล Y2K) ให้แก้ไขเฉพาะไฟล์นี้
+ * ============================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* 1. โทนสี (Monochrome Palette) */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-subtle-bg: #f8fafc;
+  --color-text: #000000;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-accent: #000000;
+  --color-accent-hover: #262626;
+  --color-warning: #334155;
+  --color-warning-bg: #f8fafc;
+  --color-warning-border: #94a3b8;
+  --color-error-bg: #fafafa;
+  --color-error-border: #000000;
+  --color-error-text: #000000;
+  --color-disabled: #f1f5f9;
+  --color-disabled-text: #94a3b8;
+
+  /* 2. ฟอนต์ (Typography) */
+  --font-thai: 'Prompt', 'Kanit', sans-serif;
+  --font-number: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ขนาดฟอนต์ (Typography Scale) */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-display: 2.75rem;/* 44px สำหรับตัวเลขสรุปหลัก */
+
+  /* 3. ระยะ (4px Scale) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+
+  /* 4. รูปทรงและเส้นขอบ */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --border-width: 1px;
+  --shadow: none; /* ไม่มีเงาในธีมนี้ */
+
+  /* 5. เอฟเฟกต์การเปลี่ยนสภาพ */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}

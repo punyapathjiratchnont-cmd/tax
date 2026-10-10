@@ -1,0 +1,553 @@
+/**
+ * ============================================================================
+ * สไตล์คอมโพเนนต์ทั้งหมดของระบบคำนวณภาษี (app.css)
+ * ============================================================================
+ * อ้างอิงเฉพาะ variables จาก theme.css เท่านั้น ห้าม hard-code สีหรือขนาดฟอนต์
+ * ============================================================================
+ */
+
+/* 1. Reset และโครงสร้างพื้นฐาน */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-thai);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  padding: var(--space-4) var(--space-3);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ป้องกันเพจเลื่อนแนวนอน */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* 2. คอนเทนเนอร์หลัก */
+#wizard-container, .result-container {
+  width: 100%;
+  max-width: 768px;
+}
+
+.wizard-wrapper, .result-container {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow);
+}
+
+/* 3. Wizard Header & Progress Bar */
+.wizard-header {
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.header-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.wizard-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.storage-buttons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--color-disabled);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width var(--transition-normal);
+}
+
+/* 4. Form Controls (ความสูงอย่างน้อย 44px เพื่อให้กดง่ายบนมือถือ) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.form-group label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-base);
+  font-family: var(--font-thai);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+/* การเน้นโฟกัสเพื่อการเข้าถึง (Accessibility Focus Outline) */
+.form-control:focus, .btn:focus, .btn-subtle:focus, .btn-preset:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.num-input {
+  font-family: var(--font-number);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.help-text {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 400;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.radio-toggle {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  min-height: 44px;
+}
+
+/* 5. Monthly Grid */
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--space-2);
+}
+
+.monthly-item label {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.monthly-sum {
+  background: var(--color-subtle-bg);
+  border: var(--border-width) solid var(--color-border);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  margin-top: var(--space-2);
+}
+
+/* 6. Buttons (ปุ่มหลัก ปุ่มรอง และปุ่ม Disabled) */
+.btn {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: 600;
+  font-family: var(--font-thai);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #ffffff;
+  border: var(--border-width) solid var(--color-accent);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-subtle-bg);
+}
+
+.btn:disabled, .btn-disabled {
+  background: var(--color-disabled);
+  color: var(--color-disabled-text);
+  border-color: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+.btn-subtle {
+  min-height: 38px;
+  background: var(--color-subtle-bg);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-family: var(--font-thai);
+  cursor: pointer;
+}
+
+.btn-subtle:hover {
+  background: var(--color-disabled);
+}
+
+/* ปุ่ม Presets (Chips) */
+.preset-buttons {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+.btn-preset {
+  min-height: 36px;
+  background: var(--color-subtle-bg);
+  border: var(--border-width) solid var(--color-border);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  font-family: var(--font-number);
+}
+
+.btn-preset:hover {
+  background: var(--color-disabled);
+}
+
+.btn-preset.selected {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+/* 7. Cards & Deduction Cards */
+.deduction-card, .summary-group {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  margin-bottom: var(--space-3);
+}
+
+.deduction-title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.input-with-cap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.cap-badge {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+/* Custom deductions & Withheld rows */
+.custom-row, .withheld-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+  margin-bottom: var(--space-2);
+}
+
+.btn-icon {
+  min-height: 44px;
+  min-width: 44px;
+  background: none;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.btn-icon:hover {
+  background: var(--color-disabled);
+}
+
+/* 8. Hero Card (การ์ดสรุปหลัก ตัวเลขใหญ่) */
+.hero-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-4);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-subtle-bg);
+}
+
+.hero-amount {
+  font-size: var(--text-display);
+  font-weight: 700;
+  font-family: var(--font-number);
+  line-height: 1.1;
+}
+
+.hero-unit {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+/* 9. Metrics Summary Card */
+.metrics-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: var(--color-subtle-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-base);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-row .metric-val {
+  font-family: var(--font-number);
+  font-weight: 600;
+}
+
+/* 10. Tables (ตารางขั้นบันไดและค่าลดหย่อน) */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  text-align: left;
+}
+
+.data-table th, .data-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.data-table th {
+  background: var(--color-subtle-bg);
+  font-weight: 600;
+}
+
+.data-table tr.dimmed {
+  opacity: 0.45;
+}
+
+.data-table td.num {
+  font-family: var(--font-number);
+  text-align: right;
+}
+
+/* 11. CSS Bar Chart */
+.chart-container {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.bar-label {
+  width: 120px;
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.bar-track {
+  flex: 1;
+  height: 16px;
+  background: var(--color-subtle-bg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-border);
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width var(--transition-normal);
+}
+
+.bar-value {
+  width: 100px;
+  font-size: var(--text-sm);
+  font-family: var(--font-number);
+  text-align: right;
+}
+
+/* 12. Advice Sections */
+.advice-section {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--color-subtle-bg);
+  font-size: var(--text-sm);
+}
+
+.advice-placeholder {
+  color: var(--color-muted);
+  font-style: italic;
+
+}
+
+/* 13. Warnings Box & Footer */
+.warnings-box {
+  background: var(--color-warning-bg);
+  border: var(--border-width) dashed var(--color-warning-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-warning);
+}
+
+.warnings-box ul {
+  padding-left: var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.wizard-disclaimer, .result-disclaimer {
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  border-top: var(--border-width) solid var(--color-border);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* Wizard Footer Navigation */
+.wizard-footer, .result-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* 14. Responsive Layout (Desktop >= 768px) */
+@media (min-width: 768px) {
+  body {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .wizard-wrapper, .result-container {
+    padding: var(--space-6);
+  }
+}
+
+/* 15. Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
