@@ -57,7 +57,7 @@ interface FormState {
   withheldRows: TaxWithheldRow[]
 }
 
-const INITIAL_FORM_STATE: FormState = {
+const DEMO_FORM_STATE: FormState = {
   taxYear: 2569,
   maritalStatus: 'single',
   spouseHasNoIncome: false,
@@ -91,6 +91,40 @@ const INITIAL_FORM_STATE: FormState = {
   withheldRows: [{ id: '1', source: 'บริษัท/นายจ้างหลัก', amount: 22000 }],
 }
 
+const INITIAL_FORM_STATE: FormState = {
+  taxYear: 2569,
+  maritalStatus: 'single',
+  spouseHasNoIncome: false,
+  childrenGeneral: 0,
+  childrenBorn2561Onwards: 0,
+  parentsSupported: 0,
+  disabledDependents: 0,
+
+  salaryMode: 'yearly',
+  monthlySalaries: Array(12).fill(0),
+  salaryYearly: 0,
+  bonus: 0,
+  otherSalaryIncome: 0,
+  exemptIncome: 0,
+
+  socialSecurity: 0,
+  providentFund: 0,
+  otherFunds: 0,
+
+  deductions: {
+    lifeInsurance: 0,
+    healthInsurance: 0,
+    parentHealthInsurance: 0,
+    rmf: 0,
+    donationEducation: 0,
+    donationGeneral: 0,
+    homeLoanInterest: 0,
+    customDeductions: [],
+  },
+
+  withheldRows: [{ id: '1', source: 'บริษัท/นายจ้างหลัก', amount: 0 }],
+}
+
 const STEP_TITLES = [
   'ข้อมูลทั่วไป',
   'เงินเดือนและโบนัส',
@@ -112,6 +146,18 @@ export default function TaxPage() {
   const [calcResult, setCalcResult] = useState<TaxResultData | null>(null)
   const [rawPayload, setRawPayload] = useState<unknown>(null)
   const [validationError, setValidationError] = useState<string | null>(null)
+
+  // Ensure storage is cleared whenever page opens or reloads
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        sessionStorage.clear()
+        localStorage.clear()
+      } catch {
+        // Storage access handled
+      }
+    }
+  }, [])
 
   // Effective total salary calculation
   const effectiveSalary = useMemo(() => {
@@ -300,11 +346,26 @@ export default function TaxPage() {
               onClick={() => {
                 setFormData(INITIAL_FORM_STATE)
                 setCalcResult(null)
+                setRawPayload(null)
                 setStep(1)
+                setValidationError(null)
               }}
-              className="hidden sm:inline-flex px-5 py-2 rounded-full border border-white/20 text-white/90 text-[13px] hover:bg-white/10 transition-colors"
+              className="hidden sm:inline-flex px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-[13px] hover:bg-white/10 transition-colors"
             >
               ล้างข้อมูล
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setFormData(DEMO_FORM_STATE)
+                setCalcResult(null)
+                setRawPayload(null)
+                setStep(1)
+                setValidationError(null)
+              }}
+              className="hidden md:inline-flex px-4 py-1.5 rounded-full border border-lime-400/30 text-lime-300 text-[13px] hover:bg-lime-400/10 transition-colors"
+            >
+              ลองตัวอย่าง
             </button>
             <button
               type="button"

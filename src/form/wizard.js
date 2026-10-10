@@ -12,13 +12,13 @@ export const INITIAL_FORM_STATE = {
   disabledDependents: 0,
 
   salaryMode: 'yearly',
-  salaryYearly: 600000,
-  salaryMonthly: Array(12).fill(50000),
+  salaryYearly: 0,
+  salaryMonthly: Array(12).fill(0),
   bonus: 0,
   otherSalaryIncome: 0,
   exemptIncome: 0,
 
-  socialSecurity: 9000,
+  socialSecurity: 0,
   providentFund: 0,
   otherFunds: 0,
 

@@ -46,13 +46,16 @@ export function toCalcInput(formState = {}) {
 
   // 2. รายได้เงินเดือน / โบนัส / เงินได้อื่น / เงินได้ยกเว้น
   let salary = 0;
-  if (Array.isArray(state.salaryMonthly) && state.salaryMonthly.length > 0) {
-    salary = state.salaryMonthly.reduce((sum, item, idx) => {
-      return sum + parseAmount(item, `salaryMonthly[${idx}]`, invalidFields);
-    }, 0);
-  } else if (Array.isArray(state.monthlySalaries) && state.monthlySalaries.length > 0) {
-    salary = state.monthlySalaries.reduce((sum, item, idx) => {
-      return sum + parseAmount(item, `monthlySalaries[${idx}]`, invalidFields);
+  const isMonthlyMode = state.salaryMode === 'monthly';
+  const isYearlyMode = state.salaryMode === 'yearly';
+  const monthlyArr = (Array.isArray(state.salaryMonthly) && state.salaryMonthly.length > 0)
+    ? state.salaryMonthly
+    : ((Array.isArray(state.monthlySalaries) && state.monthlySalaries.length > 0) ? state.monthlySalaries : null);
+
+  if (isMonthlyMode || (!isYearlyMode && monthlyArr)) {
+    const arrKey = Array.isArray(state.salaryMonthly) && state.salaryMonthly.length > 0 ? 'salaryMonthly' : 'monthlySalaries';
+    salary = monthlyArr.reduce((sum, item, idx) => {
+      return sum + parseAmount(item, `${arrKey}[${idx}]`, invalidFields);
     }, 0);
   } else {
     const salaryVal = state.salary !== undefined ? state.salary : state.salaryYearly;
